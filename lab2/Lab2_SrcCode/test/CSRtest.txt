@@ -1,0 +1,44 @@
+
+CSRtest.om:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010080 <_start>:
+   10080:	00000013          	nop
+
+00010084 <test_2>:
+   10084:	00200193          	li	gp,2
+   10088:	00100513          	li	a0,1
+   1008c:	14051073          	csrw	sscratch,a0
+   10090:	140035f3          	csrrc	a1,sscratch,zero
+   10094:	02b51e63          	bne	a0,a1,100d0 <fail>
+
+00010098 <test_3>:
+   10098:	00300193          	li	gp,3
+   1009c:	1407d073          	csrwi	sscratch,15
+   100a0:	140c7073          	csrci	sscratch,24
+   100a4:	140035f3          	csrrc	a1,sscratch,zero
+   100a8:	00700513          	li	a0,7
+   100ac:	02b51263          	bne	a0,a1,100d0 <fail>
+
+000100b0 <test_4>:
+   100b0:	00400193          	li	gp,4
+   100b4:	1407d073          	csrwi	sscratch,15
+   100b8:	140c6073          	csrsi	sscratch,24
+   100bc:	140025f3          	csrr	a1,sscratch
+   100c0:	01f00513          	li	a0,31
+   100c4:	00b51663          	bne	a0,a1,100d0 <fail>
+
+000100c8 <success>:
+   100c8:	00100193          	li	gp,1
+   100cc:	ffdff06f          	j	100c8 <success>
+
+000100d0 <fail>:
+   100d0:	00000193          	li	gp,0
+   100d4:	ffdff06f          	j	100d0 <fail>
+   100d8:	00000013          	nop
+   100dc:	00000013          	nop
+
+000100e0 <end_signature>:
+	...
